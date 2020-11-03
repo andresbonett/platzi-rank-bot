@@ -1,0 +1,21 @@
+{
+  "name": "platzi-rank-bot",
+  "version": "1.0.0",
+  "description": "Bots to get your platzi Rank without leaving telegram",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "Andres Bonett <andresbonettm@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.21.0",
+    "dotenv": "^8.2.0",
+    "telegraf": "^3.38.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  }
+}
