@@ -11,6 +11,10 @@ async function fetchRank(userPlatzi) {
     }
   } catch (err) {
     console.log('ERROR:', err.message)
+    return {
+      user: null,
+      rank: null,
+    }
   }
 }
 
