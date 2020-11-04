@@ -29,6 +29,7 @@ module.exports = () => async ctx => {
     console.log(text)
     ctx.replyWithMarkdown(text)
   } else {
+    console.log(ctx.message.text, 'err: username')
     ctx.reply('Usuario no existe o es privado')
   }
 }
