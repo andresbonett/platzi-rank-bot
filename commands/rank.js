@@ -1,39 +1,26 @@
-const axios = require('axios')
+const fetchUserDataPlatzi = require('./fetchUserDataPlatzi')
 
-async function fetchRank(userPlatzi) {
-  const API_PLATZI = `https://platzi-user-api.jecsham.com/api/v1/getUserSummary/@${userPlatzi}`
+module.exports = bot => async msg => {
+  const chatId = msg.chat.id
+  let userPlatzi = msg.text[6] === '@' ? msg.text.slice(7) : msg.text.slice(6)
+  if (!userPlatzi)
+    return bot.sendMessage(chatId, 'give me a user: /rank platzi_user')
 
-  try {
-    const response = await axios.get(API_PLATZI)
-    return {
-      user: response.data.userData.username,
-      rank: response.data.userData.platzi_rank,
-    }
-  } catch (err) {
-    console.log('ERROR:', err.message)
-    return {
-      user: null,
-      rank: null,
-    }
-  }
-}
+  const { status, error, data } = await fetchUserDataPlatzi(userPlatzi)
+  // console.log('Log: ', status, error, data)
 
-module.exports = () => async ctx => {
-  let userPlatzi =
-    ctx.message.text[6] === '@'
-      ? ctx.message.text.slice(7)
-      : ctx.message.text.slice(6)
-
-  if (!userPlatzi) return ctx.reply('dame un usuario: /rank user_platzi')
-
-  const { user, rank } = await fetchRank(userPlatzi)
-
-  if (user) {
-    const text = `platzi rank: *@${user}* = _${rank}_`
+  if (!error) {
+    const user = data.username
+    const rank = data.platzi_rank
+    const text = `🏁platzi rank: <b>@${user}</b> = <i>${rank}</i>`
     console.log(text)
-    ctx.replyWithMarkdown(text)
+    bot.sendMessage(chatId, text, { parse_mode: 'HTML' })
   } else {
-    console.log(ctx.message.text, 'err: username')
-    ctx.reply('Usuario no existe o es privado')
+    if (status == 'PrivateProfile') {
+      bot.sendMessage(chatId, 'user is private!')
+    } else {
+      console.log('command:', msg.text)
+      bot.sendMessage(chatId, 'sorry, the user does not exist in platzi')
+    }
   }
 }

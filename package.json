@@ -1,19 +1,22 @@
 {
   "name": "platzi-rank-bot",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Bots to get your platzi Rank without leaving telegram",
   "main": "index.js",
   "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "switch_to_dev": "export $(cat .env | xargs) && wget --spider https://api.telegram.org/bot$TOKEN/setWebhook?url= --delete-after && node index.js"
   },
-  "keywords": [],
   "author": "Andres Bonett <andresbonettm@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "axios": "^0.21.0",
-    "dotenv": "^8.2.0",
-    "telegraf": "^3.38.0"
+    "body-parser": "^1.15.0",
+    "dotenv": "^4.0.0",
+    "express": "^4.13.4",
+    "node-telegram-bot-api": "^0.50.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.6"
