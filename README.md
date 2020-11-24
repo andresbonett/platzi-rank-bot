@@ -1,14 +1,17 @@
-# heroku-node-telegram-bot
+# platzi-rank-bot
 
-Starter pack for running telegram bot on the Heroku using Node.js
+this project is inspired by the following [heroku-node-telegram-bot](https://github.com/odditive/heroku-node-telegram-bot) and [platzi-user-api](https://github.com/jecsham/platzi-user-api) repositories
+
+
 
 # Step-by-step
+Starter pack for running telegram bot on the Heroku using Node.js
 
 ### Try bot locally
 
 1. Create your own bot using Telegram's [BotFather](https://core.telegram.org/bots#3-how-do-i-create-a-bot) and grab your TOKEN.
 2. Clone or download and unpack this repo.
-3. Go to the app's folder using `cd ~/platzi-rank-bot`
+3. Go to the app's folder using `cd ./platzi-rank-bot`
 4. Run `npm install`.
 5. Rename .env_example file into .env and set TOKEN to the value, you've got from the BotFather.
 6. Run `npm run dev` and send /hello to your bot.
