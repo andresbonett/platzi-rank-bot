@@ -1,5 +1,4 @@
 const axios = require('axios')
-
 const PLATZI_URL = 'https://platzi.com'
 
 // Request
@@ -12,13 +11,18 @@ const PLATZI_URL = 'https://platzi.com'
 // fetchUserDataPlatzi('@privado') // privado
 // fetchUserDataPlatzi('@userValido') // OK
 
+const returnStatus = (status, error, data) => {
+  return {
+    status: status,
+    error: error,
+    data: data,
+  }
+}
+
 module.exports = async function fetchUserDataPlatzi(user) {
+  console.log(user)
   if (!user) {
-    return {
-      status: 'No User',
-      error: true,
-      data: {},
-    }
+    return returnStatus('No user', 404, {})  
   }
 
   try {
@@ -27,11 +31,7 @@ module.exports = async function fetchUserDataPlatzi(user) {
 
     // perfil es privado
     if (dataBody.includes('PrivateProfile')) {
-      return {
-        status: 'PrivateProfile',
-        error: true,
-        data: {},
-      }
+      return returnStatus('PrivateProfile', 500, {})
     }
 
     // si el perfil es publico
@@ -58,47 +58,23 @@ module.exports = async function fetchUserDataPlatzi(user) {
         inactive_courses: userData.deprecated.map(obj => filterCourses(obj)),
       }
 
-      return {
-        status: 'OK',
-        error: false,
-        data: userDataFormatted,
-      }
+      return returnStatus('OK', 200, userDataFormatted)
     }
   } catch (error) {
     // Error 404
-    return {
-      status: error.message,
-      error: true,
-      data: {},
-    }
+    return returnStatus(error.message, error.status, {})
   }
 }
 
 function filterCourses(obj) {
-  delete obj.slug
-  delete obj.color
-  delete obj.image
-  delete obj.approved
-  delete obj.diploma
-  delete obj.deprecated
-  delete obj.completed
-  delete obj.exam_url
-  delete obj.material_seen
-  delete obj.total_material
-  delete obj.has_exam
-  return obj
+  const { slug, color, image, approved, diploma, deprecated, completed, exam_url, material_seen, total_material, has_exam, ...objRes } = obj
+  return objRes
 }
 function filterCareers(obj) {
-  delete obj.slug
-  delete obj.color
-  delete obj.approved
-  delete obj.diploma
-  delete obj.percentage
-  return obj
+  const { slug, color, approved, diploma, percentage, ...objRes } = obj
+  return objRes
 }
 function filterContributions(obj) {
-  delete obj.content
-  delete obj.author_id
-  delete obj.type
-  return obj
+  const { content, author_id, type, ...objRes } = obj
+  return objRes
 }
