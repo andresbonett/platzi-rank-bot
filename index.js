@@ -1,4 +1,4 @@
-require("dotenv").config();
+// require("dotenv").config();
+const bot = require('./bot');
 
-var bot = require('./bot');
 require('./web')(bot);
