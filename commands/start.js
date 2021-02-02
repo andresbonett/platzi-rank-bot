@@ -1,1 +1,1 @@
-module.exports = () => ctx => ctx.reply('Welcome')
+module.exports = () => msg => msg.reply('Welcome')

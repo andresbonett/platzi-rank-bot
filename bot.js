@@ -1,6 +1,5 @@
 const config = require('./config')()
 const Bot = require('node-telegram-bot-api')
-// const Bot = require('telegraf')
 const hello = require('./commands/hello')
 const ping = require('./commands/ping')
 const rank = require('./commands/rank')

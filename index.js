@@ -1,4 +1,3 @@
-// require("dotenv").config();
-const bot = require('./bot');
+const bot = require('./bot')
 
-require('./web')(bot);
+require('./web')(bot)

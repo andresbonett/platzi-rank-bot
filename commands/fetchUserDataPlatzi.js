@@ -22,7 +22,7 @@ const returnStatus = (status, error, data) => {
 module.exports = async function fetchUserDataPlatzi(user) {
   console.log(user)
   if (!user) {
-    return returnStatus('No user', 404, {})  
+    return returnStatus('No user', 404, {})
   }
 
   try {
@@ -67,7 +67,20 @@ module.exports = async function fetchUserDataPlatzi(user) {
 }
 
 function filterCourses(obj) {
-  const { slug, color, image, approved, diploma, deprecated, completed, exam_url, material_seen, total_material, has_exam, ...objRes } = obj
+  const {
+    slug,
+    color,
+    image,
+    approved,
+    diploma,
+    deprecated,
+    completed,
+    exam_url,
+    material_seen,
+    total_material,
+    has_exam,
+    ...objRes
+  } = obj
   return objRes
 }
 function filterCareers(obj) {

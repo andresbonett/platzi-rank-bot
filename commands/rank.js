@@ -14,14 +14,20 @@ module.exports = bot => async msg => {
     const totalCarees = data.careers.length
     const totalCont = data.contributions.length
     const totalCurses = data.courses.length
-    const coursesInac = data.inactive_courses.length
-    console.log(totalCurses, totalCont, totalCarees, coursesInac)
-    console.log(text)
     bot.sendMessage(chatId, text, { parse_mode: 'HTML' })
-    bot.sendMessage(chatId, `@${user} ha respondido ${data.answers} veces en Platzi`)
+    bot.sendMessage(
+      chatId,
+      `@${user} ha respondido ${data.answers} veces en Platzi`
+    )
     bot.sendMessage(chatId, `@${user} ha hecho ${totalCurses} cursos en total`)
-    bot.sendMessage(chatId, `@${user} ha hecho ${totalCont} aportaciones en total`)
-    bot.sendMessage(chatId, `@${user} ha terminado ${totalCarees} carreras en total`)
+    bot.sendMessage(
+      chatId,
+      `@${user} ha hecho ${totalCont} aportaciones en total`
+    )
+    bot.sendMessage(
+      chatId,
+      `@${user} ha terminado ${totalCarees} carreras en total`
+    )
   } else {
     if (status == 'PrivateProfile') {
       bot.sendMessage(chatId, 'user is private!')
