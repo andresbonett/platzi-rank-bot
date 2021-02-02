@@ -20,7 +20,6 @@ console.log(`Bot server started in the ${config.dev} mode`)
 bot.onText(/^\/hello/, hello(bot))
 bot.onText(/^\/ping/, ping(bot))
 bot.onText(/^\/rank/, rank(bot))
-bot.onText(/^\/conCol/, converter(bot))
-bot.onText(/^\/conMex/, converter(bot))
+bot.onText(/\w/, converter(bot))
 
 module.exports = bot

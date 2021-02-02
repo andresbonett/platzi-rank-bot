@@ -1,7 +1,15 @@
 module.exports = bot => msg => {
 
+  const colCheck = ((msg.text).toLowerCase().includes('concol')) ? true : false
+  const mexCheck = ((msg.text).toLowerCase().includes('conmex')) ? true : false
+
   const chatId = msg.chat.id
-  const msgType = msg.text.slice(1,7)
+  let msgType
+  if (colCheck) {
+    msgType = 'concol'
+  } else if (mexCheck) {
+    msgType = 'conmex'
+  }
   const msgArr = (msg.text).split('')
   const mexican = 0.0057
   const colombian = 174.56
@@ -17,10 +25,12 @@ module.exports = bot => msg => {
   }
 
   try {
-    const conCo = (msgType === 'conCol') ? converter(msgArr, mexican, 'Col') : converter(msgArr, colombian, 'Mex')
-    const message = `@${msg.from.username} => ${conCo}`
-    bot.sendMessage(chatId, message)
-  } catch (e) {
+    if (msgType === 'concol' || msgType === 'conmex') {
+      const conCo = (msgType === 'concol') ? converter(msgArr, mexican, 'Col') : converter(msgArr, colombian, 'Mex')
+      const message = `@${msg.from.username} => ${conCo}`
+      bot.sendMessage(chatId, message)
+    }
+      } catch (e) {
     console.log(e)
   }
 }
