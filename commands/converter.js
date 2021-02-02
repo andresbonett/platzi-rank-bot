@@ -1,15 +1,19 @@
 module.exports = bot => msg => {
 
-  const colCheck = ((msg.text).toLowerCase().includes('concol')) ? true : false
-  const mexCheck = ((msg.text).toLowerCase().includes('conmex')) ? true : false
+  const msgs = (msg.text).toLowerCase()
 
+  // const colCheck = ((msgs.includes('concol')) ? true : false
+  // const mexCheck = (msgs.includes('conmex')) ? 'conmex' : ''
+
+  const msgType = (msgs.includes('concol')) ? 'concol' : ((msgs.includes('conmex')) ? 'conmex' : '')
   const chatId = msg.chat.id
-  let msgType
-  if (colCheck) {
-    msgType = 'concol'
-  } else if (mexCheck) {
-    msgType = 'conmex'
-  }
+
+  // let msgType
+  // if (colCheck) {
+  //   msgType = 'concol'
+  // } else if (mexCheck) {
+  //   msgType = 'conmex'
+  // }
   const msgArr = (msg.text).split('')
   const mexican = 0.0057
   const colombian = 174.56
